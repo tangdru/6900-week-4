@@ -1,7 +1,7 @@
 d3.timeSeries = function(){
 
-	var w = 800,
-		h = 600,
+	var w = 600,
+		h = 400,
 		m = {t:50,r:25,b:50,l:25},
 		layout = d3.layout.histogram(),
 		chartW = w - m.l - m.r,
@@ -34,18 +34,20 @@ d3.timeSeries = function(){
 
 	function draw(d){
 
-		var _d = layout(d);
+		var _d = layout(d); //runs data through layout function to create the coordinates
         console.log(_d);
 
 		var line = d3.svg.line()
 			.x(function(d){ return scaleX(d.x.getTime() + d.dx/2)})
 			.y(function(d){ return scaleY(d.y)})
 			.interpolate('basis');
+
 		var area = d3.svg.area()
 			.x(function(d){ return scaleX(d.x.getTime() + d.dx/2)})
 			.y0(chartH)
 			.y1(function(d){ return scaleY(d.y)})
 			.interpolate('basis');
+
         var axisX = d3.svg.axis()
             .orient('bottom')
             .scale(scaleX)

@@ -1,13 +1,13 @@
 var w = d3.select('.plot').node().clientWidth,
     h = d3.select('.plot').node().clientHeight;
 
-var timeSeries = d3.timeSeries()
+var timeSeries = d3.timeSeries() //call module,
     .width(w)
     .height(h)
     .timeRange([new Date(2011,6,16),new Date(2013,11,15)])
-    .value(function(d){ return d.startTime; })
-    .maxY(80)
-    .binSize(d3.time.day);
+    .value(function(d){ return d.startTime; })  //set accessor function
+    .maxY(80)  //set Y scale of chart
+    .binSize(d3.time.day);  //bin size is histo bars
 
 
 d3.csv('../data/hubway_trips_reduced.csv',parse,dataLoaded);
@@ -27,7 +27,8 @@ function dataLoaded(err,rows){
 
     plots
         .enter()
-        .append('div').attr('class','plot');
+        .append('div')
+        .attr('class','plot');
 
     plots
         .each(function(d){
